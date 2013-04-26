@@ -17,35 +17,76 @@
 
         <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+        <script src="js/controlador.js"></script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="js/blobstorage.js"></script>
+        <script src="js/xml2json.js"></script>
     </head>
-    <body>
+    <body ng-app>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>Cbox <small>el dropbox de Cigarreras!</small></h1>
+    </div>
 
-        <div class="page-header">
-            <h1>Cbox <small>el dropbox de Cigarreras!</small></h1>
+    <div class="row-fluid" ng-controller="gestionCrl">
+    <div class="span3">
+        <h3 class="well">Contenedores</h3>
+
+        <div ng-repeat="contenedor in datos.contenedores">
+            <p class=" alert" style="padding:5px">
+                <a ng-click="cambiarContenedor(contenedor)" class="btn btn-primary btn-medium">
+                    {{ contenedor.nombre}}
+                </a>
+                <span>{{contenedor.info}}</span>
+            </p>
         </div>
 
-        <div class="row">
-            <div class="span3">
-                <h3 class="well">Contenedores</h3>
-            </div>
-            <div class="span6">
-                <h3 class="well">Archvios</h3>
-            </div>
-            <div class="span3">
-                <h3 class="well">Info</h3>
-            </div>
+    </div>
+    <div class="span6">
+        <h3 class="well">Archivos <span ng-show="contenedorActual">({{ contenedorActual.archivos.length }})</span></h3>
+        <div ng-repeat="archivo in contenedorActual.archivos">
+            <p class=" alert" style="padding:5px">
+                <a href="#" class="btn btn-alert">
+                    {{ archivo.nombre}}
+                </a>
+                <span>{{archivo.info}}</span>
+                <a ng-click="mostrarArchivo(archivo)">Mostrar Meta Datos</a>
+            </p>
         </div>
+
+    </div>
+    <div class="span3">
+        <h3 class="well">Info</h3>
+        <span ng-show="archivoActual">
+        <div class="thumbnail info">
+            <div class="caption">
+                <h3>{{archivoActual.nombre}}</h3>
+                <p>{{archivoActual.info}}</p>
+                <p>{{archivoActual.url}}</p>
+            </div>
+
+        </div>
+        </span>
+    </div>
+</div>
+</div>
+
+
+
+
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
