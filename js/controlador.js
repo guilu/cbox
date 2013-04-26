@@ -48,4 +48,21 @@ function gestionCrl($scope){
     $scope.mostrarArchivo   = function (archivoActual){
         $scope.archivoActual = archivoActual;
     }
+
+    $scope.actualizar = function(){
+        BlobStorage.listContainers("cigarreras2","DGODWK37aVrjnYKAgLLwekylYtzCWCZxfHB+muodjwKs8yh136yX3aF6tTzRhvoRJEMCE2Jj6XVIyQ3WBEECVQ==", null, null, null, null,
+              function(data){
+
+                  var x = new X2JS();
+
+
+                  console.log(x.xml_str2json(data));
+                  alert("ok");
+              },
+              function(data){
+                  alert("error");
+              }
+          );
+      //  listContainers: function(accountName, sharedKey, localStorage, prefix, marker, maxresults, success, error) {
+    }
 }
